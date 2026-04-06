@@ -1,16 +1,20 @@
-# Camera Lens Distortion Corrector
+# Camera Calibration and Lens Distortion Correction
 
-A Python tool that calibrates a camera from a chessboard video and corrects lens distortion using OpenCV.  
-Designed for smartphone wide-angle lenses where barrel distortion is clearly visible.
+## Overview
+
+This project performs camera calibration and lens distortion correction using OpenCV.
+A chessboard pattern is used to estimate intrinsic camera parameters and distortion coefficients, and these parameters are then applied to correct distortion in video frames.
 
 ---
 
 ## Features
 
-- Extracts frames from a chessboard video and detects corner points automatically
-- Computes camera intrinsic parameters and lens distortion coefficients
-- Applies distortion correction to the full video
-- Displays original and corrected video side by side in real time
+* Automatic chessboard corner detection from video frames
+* Camera intrinsic parameter estimation (fx, fy, cx, cy)
+* Lens distortion coefficient estimation (k1, k2, p1, p2, k3)
+* Reprojection error (RMSE) calculation
+* Lens distortion correction applied to video
+* Side-by-side comparison of original and corrected video
 
 ---
 
@@ -22,54 +26,82 @@ pip install opencv-python numpy
 
 ---
 
-## How to Use
+## How to Run
 
-**1. Camera Calibration**
+### 1. Camera Calibration
+
 ```bash
 python camera_calibration.py
 ```
-- Input: `chessboard.mp4`
-- Output: `outputs/calibration_result.npz`, `outputs/calibration_result.txt`
 
-**2. Lens Distortion Correction**
+* Input: `chessboard.mp4`
+* Output:
+
+  * `outputs/calibration_result.npz`
+  * `outputs/calibration_result.txt`
+
+---
+
+### 2. Lens Distortion Correction
+
 ```bash
 python distortion_correction.py
 ```
-- Input: `chessboard.mp4` + `outputs/calibration_result.npz`
-- Output: `outputs/undistorted.mp4`, `outputs/comparison.mp4`
-- Press `q` to quit the preview window
+
+* Input: `chessboard.mp4` + calibration results
+* Output:
+
+  * `outputs/undistorted.mp4`
+  * `outputs/comparison.mp4`
+
+Press `q` to exit the preview window.
 
 ---
 
 ## Calibration Results
 
-| Parameter | Value |
-|---|---|
+| Parameter  |       Value |
+| ---------- | ----------: |
 | Image Size | 1080 × 1920 |
-| fx | 812.52 |
-| fy | 811.35 |
-| cx | 538.01 |
-| cy | 939.45 |
-| k1 | -0.02322 |
-| k2 | 0.11695 |
-| p1 | 0.00261 |
-| p2 | -0.00332 |
-| k3 | -0.26976 |
-| **RMSE** | **0.0420 px** |
+| fx         |      812.52 |
+| fy         |      811.35 |
+| cx         |      538.01 |
+| cy         |      939.45 |
+| k1         |    -0.02322 |
+| k2         |     0.11695 |
+| p1         |     0.00261 |
+| p2         |    -0.00332 |
+| k3         |    -0.26976 |
+| RMSE       |   0.0420 px |
 
 ---
 
-## Results
+## Result Videos
 
-### Side-by-side Comparison
-![Comparison](outputs/sample_comparison.jpg)
+### Undistorted Video
 
-### Individual Frames
+[View Undistorted Video](outputs/undistorted.mp4)
 
-| Original | Undistorted |
-|----------|-------------|
-| ![](outputs/sample_original.jpg) | ![](outputs/sample_undistorted.jpg) |
+### Before vs After Comparison Video
 
-### Videos
-- [Undistorted Video](outputs/undistorted.mp4)
-- [Comparison Video](outputs/comparison.mp4)
+[View Comparison Video](outputs/comparison.mp4)
+
+---
+
+## Files
+
+* `camera_calibration.py` : performs camera calibration using chessboard video
+* `distortion_correction.py` : applies lens distortion correction
+* `outputs/calibration_result.npz` : saved calibration parameters
+* `outputs/calibration_result.txt` : calibration summary
+* `outputs/undistorted.mp4` : distortion-corrected video
+* `outputs/comparison.mp4` : side-by-side comparison video
+
+---
+
+## Notes
+
+* The chessboard must be flat to ensure accurate calibration.
+* Multiple viewpoints improve calibration accuracy.
+* Lower RMSE indicates better calibration quality.
+* Distortion correction is most noticeable near image boundaries.
