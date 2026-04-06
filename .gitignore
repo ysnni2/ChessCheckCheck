@@ -1,18 +1,22 @@
-# 영상 파일
-*.mp4
-
-# 출력 결과물
-outputs/detected_*.jpg
+# 대용량 영상 파일
+chessboard.mp4
 outputs/undistorted.mp4
-outputs/comparison.mp4
 outputs/original.jpg
 outputs/undistorted.jpg
 outputs/undistorted_cropped.jpg
-outputs/comparison.jpg
 
-# 캘리브레이션 결과는 포함 (outputs/calibration_result.npz, .txt)
+# 캘리브레이션 중간 결과 이미지 (90장)
+outputs/detected_*.jpg
 
 # Python
 __pycache__/
 *.pyc
 .env
+
+# 포함되는 파일 (주석 참고)
+# outputs/calibration_result.npz
+# outputs/calibration_result.txt
+# outputs/comparison.mp4
+# outputs/sample_original.jpg
+# outputs/sample_undistorted.jpg
+# outputs/sample_comparison.jpg

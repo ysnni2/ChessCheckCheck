@@ -59,6 +59,8 @@ print(f"[INFO] 영상 정보: {w}x{h}, {fps:.1f}fps, {total}프레임")
 print("[INFO] 왜곡 보정 중...")
 
 frame_idx = 0
+sample_saved = False
+
 while True:
     ret, frame = cap.read()
     if not ret:
@@ -69,6 +71,13 @@ while True:
 
     out_undistorted.write(undistorted)
     out_comparison.write(comparison)
+
+    # 중간 프레임을 비교 이미지로 저장 (README용)
+    if frame_idx == total // 2 and not sample_saved:
+        cv2.imwrite(os.path.join(OUTPUT_DIR, "sample_original.jpg"), frame)
+        cv2.imwrite(os.path.join(OUTPUT_DIR, "sample_undistorted.jpg"), undistorted)
+        cv2.imwrite(os.path.join(OUTPUT_DIR, "sample_comparison.jpg"), comparison)
+        sample_saved = True
 
     frame_idx += 1
     if frame_idx % 30 == 0:
