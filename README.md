@@ -1,52 +1,50 @@
 # Camera Lens Distortion Corrector
 
-A tool that calibrates a camera using a chessboard pattern and corrects lens distortion from recorded video.  
-Captured with a smartphone wide-angle lens to maximize the visible distortion effect.
+A Python tool that calibrates a camera from a chessboard video and corrects lens distortion using OpenCV.  
+Designed for smartphone wide-angle lenses where barrel distortion is clearly visible.
 
 ---
 
 ## Features
 
-- Automatically detects chessboard corners from video frames
-- Estimates intrinsic camera parameters (focal length, principal point, distortion coefficients)
-- Applies lens distortion correction to video using calibration results
-- Exports side-by-side comparison video (original vs. corrected)
+- Extracts frames from a chessboard video and detects corner points automatically
+- Computes camera intrinsic parameters and lens distortion coefficients
+- Applies distortion correction to the full video
+- Displays original and corrected video side by side in real time
 
 ---
 
 ## Requirements
 
-```
+```bash
 pip install opencv-python numpy
 ```
 
 ---
 
-## Usage
+## How to Use
 
-### Step 1 — Camera Calibration
-
+**1. Camera Calibration**
 ```bash
 python camera_calibration.py
 ```
+- Input: `chessboard.mp4`
+- Output: `outputs/calibration_result.npz`, `outputs/calibration_result.txt`
 
-Reads `chessboard.mp4`, detects corners, and saves results to `outputs/calibration_result.npz`.
-
-### Step 2 — Lens Distortion Correction
-
+**2. Lens Distortion Correction**
 ```bash
 python distortion_correction.py
 ```
-
-Loads calibration results and produces corrected video.  
-Displays **Original** and **Undistorted** windows side by side. Press `q` to quit.
+- Input: `chessboard.mp4` + `outputs/calibration_result.npz`
+- Output: `outputs/undistorted.mp4`, `outputs/comparison.mp4`
+- Press `q` to quit the preview window
 
 ---
 
 ## Calibration Results
 
 | Parameter | Value |
-|-----------|-------|
+|---|---|
 | Image Size | 1080 × 1920 |
 | fx | 812.52 |
 | fy | 811.35 |
@@ -59,22 +57,16 @@ Displays **Original** and **Undistorted** windows side by side. Press `q` to qui
 | k3 | -0.26976 |
 | **RMSE** | **0.0420 px** |
 
-> RMSE below 0.05 px indicates an excellent calibration result.
-
 ---
 
 ## Results
 
-### Before / After Comparison
+### Before vs After
 
-| Original (Distorted) | Undistorted |
+| Original | Undistorted |
 |---|---|
 | ![original](outputs/sample_original.jpg) | ![undistorted](outputs/sample_undistorted.jpg) |
 
 ### Side-by-side Comparison
 
 ![comparison](outputs/sample_comparison.jpg)
-
-### Comparison Video
-
-https://github.com/ysnni2/ChessCheckCheck/blob/master/outputs/comparison.mp4
