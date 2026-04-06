@@ -1,0 +1,18 @@
+# 영상 파일
+*.mp4
+
+# 출력 결과물
+outputs/detected_*.jpg
+outputs/undistorted.mp4
+outputs/comparison.mp4
+outputs/original.jpg
+outputs/undistorted.jpg
+outputs/undistorted_cropped.jpg
+outputs/comparison.jpg
+
+# 캘리브레이션 결과는 포함 (outputs/calibration_result.npz, .txt)
+
+# Python
+__pycache__/
+*.pyc
+.env
