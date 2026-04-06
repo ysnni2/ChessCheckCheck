@@ -61,12 +61,15 @@ python distortion_correction.py
 
 ## Results
 
-### Before vs After
+### Side-by-side Comparison
+![Comparison](outputs/sample_comparison.jpg)
+
+### Individual Frames
 
 | Original | Undistorted |
-|---|---|
-| ![original](outputs/sample_original.jpg) | ![undistorted](outputs/sample_undistorted.jpg) |
+|----------|-------------|
+| ![](outputs/sample_original.jpg) | ![](outputs/sample_undistorted.jpg) |
 
-### Side-by-side Comparison
-
-![comparison](outputs/sample_comparison.jpg)
+### Videos
+- [Undistorted Video](outputs/undistorted.mp4)
+- [Comparison Video](outputs/comparison.mp4)
