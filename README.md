@@ -3,18 +3,18 @@
 ## Overview
 
 This project performs camera calibration and lens distortion correction using OpenCV.
-A chessboard pattern is used to estimate intrinsic camera parameters and distortion coefficients, and then apply undistortion to images.
+A chessboard pattern is used to estimate intrinsic camera parameters and distortion coefficients, and then apply undistortion to video frames.
 
 ---
 
 ## Features
 
-* Chessboard corner detection from video
-* Camera calibration (intrinsic parameters estimation)
-* Distortion coefficient estimation
-* Reprojection error (RMSE) calculation
-* Lens distortion correction (image undistortion)
-* Visualization of detected corners and corrected results
+* Chessboard corner detection from video frames
+* Camera intrinsic parameter estimation
+* Lens distortion estimation
+* Reprojection error (RMSE) evaluation
+* Lens distortion correction (video undistortion)
+* Visualization of calibration and correction results
 
 ---
 
@@ -45,21 +45,19 @@ A chessboard pattern is used to estimate intrinsic camera parameters and distort
 
 ### 1. Data Acquisition
 
-* A chessboard pattern was printed and captured using a camera.
-* The video includes multiple viewpoints (different angles, distances, and positions).
+A chessboard pattern was printed and captured using a camera from multiple viewpoints (different angles, distances, and positions).
 
 ### 2. Corner Detection
 
-* Chessboard corners are detected using OpenCV.
-* Subpixel refinement is applied for accuracy.
+Chessboard corners were detected using OpenCV and refined to subpixel accuracy.
 
 ### 3. Camera Calibration
 
-* Intrinsic parameters and distortion coefficients are estimated using multiple frames.
+Intrinsic parameters and distortion coefficients were estimated using multiple frames.
 
 ### 4. Distortion Correction
 
-* The estimated parameters are used to remove lens distortion from images.
+The estimated parameters were applied to remove lens distortion from the video.
 
 ---
 
@@ -67,19 +65,25 @@ A chessboard pattern is used to estimate intrinsic camera parameters and distort
 
 ### Chessboard Corner Detection
 
-(Insert screenshot here)
+![Corner Detection](outputs/detected_01.jpg)
 
-### Before / After Distortion Correction
+### Distortion Correction (Video)
 
-(Insert comparison image here)
+#### Undistorted Video
+
+* outputs/undistorted.mp4
+
+#### Comparison Video (Before vs After)
+
+* outputs/comparison.mp4
 
 ---
 
 ## Files
 
-* `camera_calibration.py` : performs camera calibration
-* `distortion_correction.py` : applies lens distortion correction
-* `outputs/` : stores calibration results and images
+* `camera_calibration.py` : camera calibration
+* `distortion_correction.py` : lens distortion correction
+* `outputs/` : result files (images, videos, parameters)
 
 ---
 
@@ -99,13 +103,13 @@ pip install opencv-python numpy
 
 ## How to Run
 
-### 1. Camera Calibration
+### Camera Calibration
 
 ```bash
 python camera_calibration.py
 ```
 
-### 2. Distortion Correction
+### Distortion Correction
 
 ```bash
 python distortion_correction.py
@@ -116,5 +120,6 @@ python distortion_correction.py
 ## Notes
 
 * A flat chessboard is required for accurate calibration.
-* Multiple viewpoints improve calibration accuracy.
-* Lower RMSE indicates better calibration quality.
+* Multiple viewpoints improve calibration quality.
+* Lower RMSE indicates more accurate calibration.
+* Distortion correction improves geometric accuracy, especially near image boundaries.
